@@ -4,17 +4,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SolarFields - Métricas On-chain</title>
+    <title>SolarFields - Resumo Métricas On-chain</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #1e3a8a, #9b2c2c);
+            background: linear-gradient(135deg, #1748a3d8, #9b2c2c);
             color: #ffffff;
         }
         header {
-            background: #1e3a8a;
+            background: #1748a3d8;
             padding: 20px;
             text-align: center;
             color: #fff;
@@ -23,32 +23,6 @@
         header h1 {
             margin: 0;
             font-size: 2.5rem;
-        }
-        nav {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 10px 0;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-        }
-        nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-        }
-        nav ul li {
-            margin: 0 15px;
-        }
-        nav ul li a {
-            color: #ffffff;
-            text-decoration: none;
-            font-size: 1.2rem;
-            padding: 5px 15px;
-            border-radius: 20px;
-            transition: background-color 0.3s;
-        }
-        nav ul li a:hover {
-            background-color: #2d3748;
         }
         main {
             padding: 40px 20px;
@@ -64,17 +38,15 @@
             margin-bottom: 20px;
             color: #fbbf24;
         }
-        .crypto-metrics {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
+        .crypto-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
         }
         .crypto-card {
             background: rgba(0, 0, 0, 0.3);
             border-radius: 10px;
             padding: 20px;
-            margin: 10px;
-            width: 220px;
             text-align: center;
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
         }
@@ -94,99 +66,55 @@
             color: #ffffff;
         }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <header>
-        <h1>SolarFields - Métricas On-chain</h1>
+        <h1>SolarFields - Resumo Métricas On-chain</h1>
+    </header>
+    <main>
+        <header>
+        <h1>SolarFields - Energia</h1>
     </header>
     <nav>
         <ul>
-            <li><a href="#crypto-metrics">Métricas On-chain</a></li>
-            <li><a href="#charts">Gráficos</a></li>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="tecnologia.html">tecnologia</a>
+            <li><a href="#performance">Desempenho</a></li>
+            <li><a href="#community">Comunidade</a></li>
         </ul>
     </nav>
-    <main>
-        <section id="crypto-metrics">
-            <h2>Métricas On-chain do Bitcoin</h2>
-            <div class="crypto-metrics">
+        <section>
+            <h2>Métricas Resumidas</h2>
+            <div class="crypto-summary">
                 <div class="crypto-card">
                     <h3>Taxa de Hash</h3>
-                    <p id="hash-rate">Carregando...</p>
+                    <p>360 EH/s</p>
                 </div>
                 <div class="crypto-card">
-                    <h3>Supply em Circulação</h3>
-                    <p id="btc-supply">Carregando...</p>
-                </div>
-                <div class="crypto-card">
-                    <h3>Número de Transações</h3>
-                    <p id="transaction-count">Carregando...</p>
+                    <h3>Transações em 24h</h3>
+                    <p>450,000+</p>
                 </div>
                 <div class="crypto-card">
                     <h3>Taxa Média</h3>
-                    <p id="network-fee">Carregando...</p>
+                    <p>4 sat/byte</p>
+                </div>
+                <div class="crypto-card">
+                    <h3>Tamanho da Mempool</h3>
+                    <p>5 MB</p>
+                </div>
+                <div class="crypto-card">
+                    <h3>Supply em Circulação</h3>
+                    <p>19.5 milhões BTC</p>
                 </div>
             </div>
         </section>
-
-        <section id="charts">
-            <h2>Gráfico de Desempenho</h2>
-            <canvas id="performanceChart" width="600" height="400"></canvas>
+        <section>
+            <h2>Sobre as Métricas</h2>
+            <p>Essas métricas refletem a saúde e robustez da rede Bitcoin. Taxas de hash elevadas demonstram segurança, enquanto o número de transações e o tamanho da mempool mostram a atividade da rede. O supply em circulação reforça a escassez do Bitcoin, com um limite total de 21 milhões de moedas.</p>
         </section>
     </main>
     <footer>
-        <p>&copy; 2024 SolarFields. Dados providos por Binance e CoinMarketCap.</p>
+        <p>&copy; 2024 SolarFields. Dados compilados de fontes públicas como Binance, CoinMarketCap e Mempool.</p>
     </footer>
-    <script>
-        document.addEventListener("DOMContentLoaded", async function () {
-            try {
-                // Exemplo de fonte de dados pública: Binance e CoinMarketCap (requer configuração de API)
-
-                const fetchData = async (url, key) => {
-                    const response = await fetch(`${url}?apiKey=${key}`);
-                    return response.json();
-                };
-
-                // API fictícia para demonstração, substitua pela chave de sua fonte real
-                const apiKey = "SUA_API_KEY";
-                const baseUrl = "https://api.binance.com/api/v3/ticker/price";
-
-                const data = await fetchData(baseUrl, apiKey);
-                
-                // Placeholder para atualização de dados
-                document.getElementById("hash-rate").innerText = "320 EH/s";
-                document.getElementById("btc-supply").innerText = "19.3M BTC";
-                document.getElementById("transaction-count").innerText = "300K";
-                document.getElementById("network-fee").innerText = "0.00025 BTC";
-
-                // Renderizando gráfico com dados
-                const ctx = document.getElementById("performanceChart").getContext("2d");
-                new Chart(ctx, {
-                    type: "line",
-                    data: {
-                        labels: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun"],
-                        datasets: [{
-                            label: "Hashrate",
-                            data: [250, 270, 300, 320, 310, 330],
-                            borderColor: "#fbbf24",
-                            borderWidth: 2,
-                            fill: false
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        plugins: {
-                            legend: { display: true }
-                        },
-                        scales: {
-                            y: { beginAtZero: true }
-                        }
-                    }
-                });
-            } catch (error) {
-                console.error("Erro ao carregar dados on-chain:", error);
-            }
-        });
-    </script>
 </body>
 </html>
