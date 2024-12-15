@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>SolarFields - Energia</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #090e18f5, #250a0ad8);
+            color: #fffbe2;
+        }
+        header {
+            background: #0e1116be;
+            color: #fbfdfc;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0px 4px 6px rgba(61, 78, 64, 0.459);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        nav {
+            background: #a19d9723;
+            box-shadow: 0px 4px 6px rgba(70, 72, 85, 0.2);
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+        nav ul li {
+            margin: 0 15px;
+        }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 10px 20px;
+            border-radius: 20px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        nav ul li a:hover {
+            background-color: #272636;
+            color: #9ca739;
+        }
+        main {
+            padding: 40px 20px;
+            text-align: center;
+        }
+        section {
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(29, 22, 22, 0.1);
+            border-radius: 15px;
+            box-shadow: 0px 4px 6px rgba(126, 35, 35, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        section:hover {
+            transform: scale(1.03);
+            box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.5);
+        }
+        h2 {
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            color: #ffde59;
+        }
+        p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #ddd;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        ul li {
+            margin: 10px 0;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        footer {
+            background: #834e1100;
+            padding: 20px 0;
+            text-align: center;
+            color: #ffffff;
+            font-size: 0.9rem;
+            box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.2);
+        }
+        .pixel-art {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            color: #ffde59;
+        }
+        .crypto-info {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        .crypto-card {
+            background: rgba(29, 22, 22, 0.1);
+            border-radius: 15px;
+            box-shadow: 0px 4px 6px rgba(126, 35, 35, 0.3);
+            padding: 20px;
+            margin: 10px;
+            width: 200px;
+            text-align: center;
+        }
+        .crypto-card h3 {
+            margin: 0;
+            font-size: 1.5rem;
+            color: #ffde59;
+        }
+        .crypto-card p {
+            margin: 10px 0;
+            font-size: 1rem;
+            color: #ddd;
+        }
+        .crypto-card .variation {
+            font-size: 0.9rem;
+            color: #ffde59;
+        }
+        .date-time {
+            margin: 20px 0;
+            font-size: 1.2rem;
+            color: #ffde59;
+        }
+        .events {
+            margin: 20px 0;
+            font-size: 1rem;
+            color: #ddd;
+        }
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+            }
+            nav ul li {
+                margin: 10px 0;
+            }
+            header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <h1>SolarFields - Energia</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="tecnologia.html">Tecnologia</a>
+            <li><a href="roadmap.html">Roadmap</a></li>
+            <li><a href="#community">Comunidade</a></li>
+        </ul>
+    </nav>
+    <main>
+        <section id="history">
+            <h2>História da SolarFields</h2>
+            <p>A SolarFields LTDA iniciou suas operações em outubro de 2023, focada em transformar energia excedente de fontes renováveis em valor digital. Nossa jornada começou com pequenos passos na exploração de tecnologias para mineração de criptomoedas, utilizando o potencial de CPUs e GPUs.</p>
+        </section>
+        <section id="roadmap">
+            <h2>Roadmap</h2>
+            <ul>
+                <li><strong>Outubro de 2023:</strong> Start da SolarFields e início das operações utilizando energia excedente para mineração.</li>
+                <li><strong>Abril de 2024:</strong> Lançamento do programa DCA (Dollar Cost Averaging) para mineração, com conversão automática de ganhos para Bitcoin em tempo real.</li>
+                <li><strong>Janeiro de 2025:</strong> Ampliação da infraestrutura para incluir fontes de energia solar.</li>
+                <li><strong>Junho de 2025:</strong> Introdução de uma plataforma baseada em IA para maximizar a eficiência energética e prever demandas de mercado.</li>
+                <li><strong>Dezembro de 2026:</strong> Expansão operacional para mercados emergentes, promovendo soluções sustentáveis de energia digital.</li>
+                <li><strong>Março de 2027:</strong> Lançamento de uma blockchain proprietária para rastreamento de carbono e certificação de energia limpa.</li>
+                <li><strong>Dezembro de 2027:</strong> Estabelecimento em soluções de energia renovável para mineração e aplicações digitais.</li>
+            </ul>
+        </section>
+        <section id="performance">
+            <h2>Gráfico de Desempenho</h2>
+            <canvas id="performanceChart" width="450" height="300"></canvas>
+        </section>
+        <section id="crypto-info">
+            <h2>Informações de Criptomoedas e Moedas</h2>
+            <div class="crypto-info">
+                <div class="crypto-card" id="btc-info">
+                    <h3>Bitcoin</h3>
+                    <p>Preço: <span id="btc-price">Carregando...</span></p>
+                    <p>Dificuldade: <span id="btc-difficulty">Carregando...</span></p>
+                    <p class="variation">Variação 24h: <span id="btc-variation">Carregando...</span></p>
+                </div>
+                <div class="crypto-card" id="usd-info">
+                    <h3>Dólar (USD)</h3>
+                    <p>Preço: <span id="usd-price">Carregando...</span></p>
+                    <p class="variation">Variação 24h: <span id="usd-variation">Carregando...</span></p>
+                </div>
+                <div class="crypto-card" id="eur-info">
+                    <h3>Euro (EUR)</h3>
+                    <p>Preço: <span id="eur-price">Carregando...</span></p>
+                    <p class="variation">Variação 24h: <span id="eur-variation">Carregando...</span></p>
+                </div>
+                <div class="crypto-card" id="brl-info">
+                    <h3>Real (BRL)</h3>
+                    <p>Preço: <span id="brl-price">Carregando...</span></p>
+                    <p class="variation">Variação 24h: <span id="brl-variation">Carregando...</span></p>
+                </div>
+                <div class="crypto-card" id="gbp-info">
+                    <h3>Libra Esterlina (GBP)</h3>
+                    <p>Preço: <span id="gbp-price">Carregando...</span></p>
+                    <p class="variation">Variação 24h: <span id="gbp-variation">Carregando...</span></p>
+                </div>
+                <div class="crypto-card" id="cny-info">
+                    <h3>Yuan Chinês (CNY)</h3>
+                    <p>Preço: <span id="cny-price">Carregando...</span></p>
+                    <p class="variation">Variação 24h: <span id="cny-variation">Carregando...</span></p>
+                </div>
+                <div class="crypto-card" id="rub-info">
+                    <h3>Rublo Russo (RUB)</h3>
+                    <p>Preço: <span id="rub-price">Carregando...</span></p>
+                    <p class="variation">Variação 24h: <span id="rub-variation">Carregando...</span></p>
+                </div>
+            </div>
+        </section>
+        <section id="date-time">
+            <h2>Data e Hora Atual</h2>
+            <p class="date-time" id="current-date-time">Carregando...</p>
+        </section>
+        <section id="events">
+            <h2>Eventos Importantes</h2>
+            <ul class="events" id="important-events">
+                <li>Carregando eventos...</li>
+            </ul>
+        </section>
+        <section id="community">
+            <h2>Comunidade</h2>
+            <p>Junte-se à nossa comunidade para discutir as últimas tendências em energia renovável e mineração de criptomoedas. Participe de fóruns, webinars e eventos exclusivos.</p>
+            <ul>
+                <li><a href="https://forum.solarfields.com">Fórum da Comunidade</a></li>
+                <li><a href="https://webinars.solarfields.com">Webinars</a></li>
+                <li><a href="https://events.solarfields.com">Eventos</a></li>
+            </ul>
+        </section>
+    </main>
+    <footer>
+        <p class="pixel-art">SOLARFIELDS LTDA</p>
+        <p>&copy; 2024 SolarFields LTDA. Todos os direitos reservados.</p>
+    </footer>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const ctx = document.getElementById('performanceChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Outubro 2023', 'Abril 2024', 'Janeiro 2025', 'Junho 2025', 'Dezembro 2026', 'Março 2027', 'Dezembro 2027'],
+                    datasets: [{
+                        label: 'Progresso do Roadmap',
+                        data: [10, 25, 50, 70, 90, 95, 100],
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 2,
+                        fill: false
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: true
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            // Fetch cryptocurrency and currency data
+            async function fetchCryptoData() {
+                try {
+                    const coingeckoResponse = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd,eur,brl,gbp,cny,rub&include_24hr_change=true');
+                    const coingeckoData = await coingeckoResponse.json();
+                    
+                    const btcPrice = coingeckoData.bitcoin.usd;
+                    const btcVariation = coingeckoData.bitcoin.usd_24h_change.toFixed(2);
+                    document.getElementById('btc-price').innerText = `$${btcPrice}`;
+                    document.getElementById('btc-variation').innerText = `${btcVariation}%`;
+
+                    const usdPrice = coingeckoData.bitcoin.usd;
+                    const usdVariation = coingeckoData.bitcoin.usd_24h_change.toFixed(2);
+                    document.getElementById('usd-price').innerText = `$${usdPrice}`;
+                    document.getElementById('usd-variation').innerText = `${usdVariation}%`;
+
+                    const eurPrice = coingeckoData.bitcoin.eur;
+                    const eurVariation = coingeckoData.bitcoin.eur_24h_change.toFixed(2);
+                    document.getElementById('eur-price').innerText = `€${eurPrice}`;
+                    document.getElementById('eur-variation').innerText = `${eurVariation}%`;
+
+                    const brlPrice = coingeckoData.bitcoin.brl;
+                    const brlVariation = coingeckoData.bitcoin.brl_24h_change.toFixed(2);
+                    document.getElementById('brl-price').innerText = `R$${brlPrice}`;
+                    document.getElementById('brl-variation').innerText = `${brlVariation}%`;
+
+                    const gbpPrice = coingeckoData.bitcoin.gbp;
+                    const gbpVariation = coingeckoData.bitcoin.gbp_24h_change.toFixed(2);
+                    document.getElementById('gbp-price').innerText = `£${gbpPrice}`;
+                    document.getElementById('gbp-variation').innerText = `${gbpVariation}%`;
+
+                    const cnyPrice = coingeckoData.bitcoin.cny;
+                    const cnyVariation = coingeckoData.bitcoin.cny_24h_change.toFixed(2);
+                    document.getElementById('cny-price').innerText = `¥${cnyPrice}`;
+                    document.getElementById('cny-variation').innerText = `${cnyVariation}%`;
+
+                    const rubPrice = coingeckoData.bitcoin.rub;
+                    const rubVariation = coingeckoData.bitcoin.rub_24h_change.toFixed(2);
+                    document.getElementById('rub-price').innerText = `₽${rubPrice}`;
+                    document.getElementById('rub-variation').innerText = `${rubVariation}%`;
+
+                    const difficultyResponse = await fetch('https://blockchain.info/q/getdifficulty');
+                    const difficultyData = await difficultyResponse.json();
+                    document.getElementById('btc-difficulty').innerText = difficultyData;
+                } catch (error) {
+                    console.error('Erro ao buscar dados:', error);
+                }
+            }
+
+            function updateDateTime() {
+                const now = new Date();
+                const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+                const formattedDateTime = now.toLocaleDateString('pt-BR', options);
+                document.getElementById('current-date-time').innerText = formattedDateTime;
+            }
+
+            async function fetchImportantEvents() {
+                try {
+                    const eventsResponse = await fetch('https://api.coingecko.com/api/v3/events');
+                    const eventsData = await eventsResponse.json();
+                    const eventsList = document.getElementById('important-events');
+                    eventsList.innerHTML = '';
+                    eventsData.data.forEach(event => {
+                        const listItem = document.createElement('li');
+                        listItem.innerText = `${event.title} - ${event.description}`;
+                        eventsList.appendChild(listItem);
+                    });
+                } catch (error) {
+                    console.error('Erro ao buscar eventos:', error);
+                }
+            }
+
+            fetchCryptoData();
+            updateDateTime();
+            fetchImportantEvents();
+            setInterval(updateDateTime, 1000); // Atualiza a data e hora a cada segundo
+        });
+    </script>
+</body>
+</html>
