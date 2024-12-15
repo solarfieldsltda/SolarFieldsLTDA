@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>SolarFields - Energia</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #1748a3d8, #9b1e1ed8);
+            color: #ffffff;
+        }
+        header {
+            background: #1748a3d8;
+            color: #fbfdfc;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0px 4px 6px rgba(61, 78, 64, 0.459);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        nav {
+            background: #a19d9723;
+            box-shadow: 0px 4px 6px rgba(70, 72, 85, 0.2);
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+        nav ul li {
+            margin: 0 15px;
+        }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 10px 20px;
+            border-radius: 20px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        nav ul li a:hover {
+            background-color: #272636;
+            color: #fff;
+        }
+        main {
+            padding: 40px 20px;
+            text-align: center;
+        }
+        section {
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(29, 22, 22, 0.1);
+            border-radius: 15px;
+            box-shadow: 0px 4px 6px rgba(126, 35, 35, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        section:hover {
+            transform: scale(1.03);
+            box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.5);
+        }
+        h2 {
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            color: #ffde59;
+        }
+        p, ul li {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #ddd;
+        }
+        footer {
+            background: #834e1100;
+            padding: 20px 0;
+            text-align: center;
+            color: #ffffff;
+            font-size: 0.9rem;
+            box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.2);
+        }
+        .crypto-card {
+            background: rgba(29, 22, 22, 0.1);
+            border-radius: 15px;
+            box-shadow: 0px 4px 6px rgba(126, 35, 35, 0.3);
+            padding: 20px;
+            margin: 10px;
+            width: 200px;
+            text-align: center;
+        }
+        .crypto-card h3 {
+            margin: 0;
+            font-size: 1.5rem;
+            color: #ffde59;
+        }
+        .crypto-card p {
+            margin: 10px 0;
+        }
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+            }
+            nav ul li {
+                margin: 10px 0;
+            }
+            header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <h1>SolarFields - Energia</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#performance">Tecnologia</a></li>
+            <li><a href="#crypto-metrics">Métricas On-chain</a></li>
+        </ul>
+    </nav>
+    <main>
+        <section id="crypto-metrics">
+            <h2>Métricas On-chain do Bitcoin</h2>
+            <div class="crypto-card">
+                <h3>Taxa de Hash</h3>
+                <p id="hash-rate">Carregando...</p>
+            </div>
+            <div class="crypto-card">
+                <h3>Supply em Circulação</h3>
+                <p id="btc-supply">Carregando...</p>
+            </div>
+            <div class="crypto-card">
+                <h3>Número de Transações</h3>
+                <p id="transaction-count">Carregando...</p>
+            </div>
+            <div class="crypto-card">
+                <h3>Taxa Média da Rede</h3>
+                <p id="network-fee">Carregando...</p>
+            </div>
+            <div class="crypto-card">
+                <h3>Transações por Segundo</h3>
+                <p id="transactions-per-second">Carregando...</p>
+            </div>
+            <div class="crypto-card">
+                <h3>Lugares Mais Usados</h3>
+                <p id="most-used-places">Carregando...</p>
+            </div>
+        </section>
+       
+    </main>
+    <footer>
+        <p>&copy; 2024 SolarFields LTDA. Todos os direitos reservados.</p>
+    </footer>
+    <script>
+        document.addEventListener("DOMContentLoaded", async function() {
+            try {
+                // Fetch Bitcoin on-chain data
+                const hashRateResponse = await fetch('https://blockchain.info/q/hashrate');
+                const hashRate = (await hashRateResponse.text() / 1e9).toFixed(2) + ' EH/s';
+                document.getElementById('hash-rate').innerText = hashRate;
+
+                const supplyResponse = await fetch('https://blockchain.info/q/totalbc');
+                const btcSupply = (await supplyResponse.text() / 1e8).toFixed(2) + ' BTC';
+                document.getElementById('btc-supply').innerText = btcSupply;
+
+                const txCountResponse = await fetch('https://blockchain.info/q/24hrtransactioncount');
+                const transactionCount = await txCountResponse.text();
+                document.getElementById('transaction-count').innerText = transactionCount;
+
+                const networkFeeResponse = await fetch('https://blockchain.info/q/24hravgblockfees');
+                const networkFee = (await networkFeeResponse.text() / 1e8).toFixed(8) + ' BTC';
+                document.getElementById('network-fee').innerText = networkFee;
+
+                const txPerSecondResponse = await fetch('https://blockchain.info/q/avgtxsize');
+                const transactionsPerSecond = (parseInt(transactionCount) / 86400).toFixed(2) + ' TPS';
+                document.getElementById('transactions-per-second').innerText = transactionsPerSecond;
+
+                // Placeholder for most used places
+                const mostUsedPlaces = "Global, EUA, Europa"; // Exemplo fixo
+                document.getElementById('most-used-places').innerText = mostUsedPlaces;
+
+            } catch (error) {
+                console.error('Erro ao carregar dados on-chain:', error);
+            }
+        });
+    </script>
+</body>
+</html>
