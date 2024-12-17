@@ -7,27 +7,35 @@
     <title>SolarFields - Resumo Métricas On-chain</title>
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
-            background: #090e18f5;
+            background: #090e18;
             color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            flex-direction: column;
         }
         header {
-            background: #090e18f5;
+            background: #090e18;
             padding: 20px;
             text-align: center;
             color: #fff;
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+            width: 100%;
         }
-        header h1 {
+        header h2 {
             margin: 0;
             font-size: 2.5rem;
+            font-weight: 700;
         }
         nav {
             background: #2d3748;
             padding: 10px;
-            text-align: center;
+            width: 100%;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
         }
         nav ul {
             list-style: none;
@@ -42,10 +50,13 @@
         nav ul li a {
             text-decoration: none;
             color: #fbbf24;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
+            font-weight: 500;
         }
         main {
             padding: 40px 20px;
+            width: 80%;
+            max-width: 1200px;
         }
         section {
             margin: 20px 0;
@@ -56,11 +67,12 @@
         }
         h2 {
             margin-bottom: 20px;
+            font-size: 1.8rem;
             color: #fbbf24;
         }
         .crypto-summary {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
         }
         .crypto-card {
@@ -69,14 +81,16 @@
             padding: 20px;
             text-align: center;
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 2s ease-out;
         }
         .crypto-card h3 {
             margin-bottom: 10px;
             font-size: 1.5rem;
+            font-weight: 600;
             color: #fbbf24;
         }
         .crypto-card p {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             margin: 0;
         }
         footer {
@@ -84,6 +98,29 @@
             padding: 20px;
             text-align: center;
             color: #ffffff;
+            font-size: 1rem;
+            width: 100%;
+            margin-top: 40px;
+        }
+        .metric {
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: #fbbf24;
+        }
+        .positive {
+            color: green;
+        }
+        .negative {
+            color: red;
+        }
+        .loading {
+            font-style: italic;
+            color: #fbbf24;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
         }
     </style>
 </head>
@@ -101,27 +138,48 @@
     </nav>
     <main>
         <section>
-            <h2>Métricas Resumidas</h2>
+            <h2>Métricas On-time</h2>
             <div class="crypto-summary">
                 <div class="crypto-card">
+                    <h3>Valor do Bitcoin</h3>
+                    <p id="btcValue" class="loading">Carregando...</p>
+                    <p id="btcChange" class="metric loading">Variação: Carregando...</p>
+                </div>
+                <div class="crypto-card">
                     <h3>Taxa de Hash</h3>
-                    <p>360 EH/s</p>
+                    <p id="hashRate" class="loading">Carregando...</p>
+                </div>
+                <div class="crypto-card">
+                    <h3>Blocos Minerados</h3>
+                    <p id="blocksMined" class="loading">Carregando...</p>
+                </div>
+                <div class="crypto-card">
+                    <h3>Tempo Médio por Bloco</h3>
+                    <p id="avgBlockTime" class="loading">Carregando...</p>
+                </div>
+                <div class="crypto-card">
+                    <h3>Recompensa por Bloco</h3>
+                    <p id="blockReward" class="loading">Carregando...</p>
                 </div>
                 <div class="crypto-card">
                     <h3>Transações em 24h</h3>
-                    <p>450,000+</p>
+                    <p id="transactions" class="loading">Carregando...</p>
                 </div>
                 <div class="crypto-card">
                     <h3>Taxa Média</h3>
-                    <p>4 sat/byte</p>
+                    <p id="avgFee" class="loading">Carregando...</p>
                 </div>
                 <div class="crypto-card">
                     <h3>Tamanho da Mempool</h3>
-                    <p>5 MB</p>
+                    <p id="mempoolSize" class="loading">Carregando...</p>
                 </div>
                 <div class="crypto-card">
                     <h3>Supply em Circulação</h3>
-                    <p>19.5 milhões BTC</p>
+                    <p id="circulatingSupply" class="loading">Carregando...</p>
+                </div>
+                <div class="crypto-card">
+                    <h3>Variação Anual</h3>
+                    <p id="annualChange" class="loading">Carregando...</p>
                 </div>
             </div>
         </section>
@@ -131,7 +189,74 @@
         </section>
     </main>
     <footer>
-        <p>&copy; 2024 SolarFields. Dados compilados de fontes públicas como Binance, CoinMarketCap e Mempool.</p>
+        <p>&copy; 2024 SolarFields. Dados compilados de fontes públicas como Binance, CoinMarketCap, Mempool e Blockchain.info.</p>
     </footer>
+
+    <script>
+        async function fetchMetrics() {
+            try {
+                // API para obter dados de Bitcoin
+                const response = await fetch('https://api.coingecko.com/api/v3/coins/bitcoin?localization=false');
+                const data = await response.json();
+                const miningResponse = await fetch('https://blockchain.info/q/24hrblockcount'); // Exemplo de API para dados de mineração
+                const miningData = await miningResponse.json();
+
+                if (!data || !data.market_data) {
+                    throw new Error('Dados inválidos ou não encontrados');
+                }
+
+                // Atualizando o valor do Bitcoin
+                document.getElementById('btcValue').textContent = `R$ ${data.market_data.current_price.brl || 'Dados não disponíveis'}`;
+
+                // Formatando variação de preço
+                const change24h = formatChange(data.market_data.price_change_percentage_24h);
+                const change1y = formatChange(data.market_data.price_change_percentage_1y);
+                document.getElementById('btcChange').textContent = `Variação: 24h: ${change24h} | 1 ano: ${change1y}`;
+
+                // Atualizando a Taxa de Hash
+                document.getElementById('hashRate').textContent = `Hash Rate: ${data.market_data.hashrate || 'Dados não disponíveis'}`;
+
+                // Atualizando Transações em 24h
+                document.getElementById('transactions').textContent = `${data.market_data.total_volumes ? data.market_data.total_volumes[0] : 'Dados não disponíveis'}`;
+
+                // Atualizando a Taxa Média
+                document.getElementById('avgFee').textContent = `${data.market_data.avg_fee || 'Dados não disponíveis'}`;
+
+                // Atualizando o tamanho da Mempool
+                document.getElementById('mempoolSize').textContent = `${data.market_data.mempool_size || 'Dados não disponíveis'}`;
+
+                // Atualizando o Supply em Circulação
+                document.getElementById('circulatingSupply').textContent = `${data.market_data.circulating_supply || 'Dados não disponíveis'}`;
+
+                // Atualizando a variação anual
+                document.getElementById('annualChange').textContent = formatChange(data.market_data.price_change_percentage_1y);
+
+                // Dados de mineração
+                document.getElementById('blocksMined').textContent = `Blocos Minerados: ${miningData || 'Dados não disponíveis'}`;
+                document.getElementById('avgBlockTime').textContent = `Tempo Médio por Bloco: 10 minutos`; // Exemplo de valor fixo, mas pode ser obtido com mais APIs
+                document.getElementById('blockReward').textContent = `Recompensa por Bloco: 6.25 BTC`; // Exemplo, este valor também varia com o tempo
+
+            } catch (error) {
+                console.error('Erro ao buscar as métricas:', error);
+                document.getElementById('btcValue').textContent = 'Erro ao carregar dados.';
+                document.getElementById('btcChange').textContent = 'Erro ao carregar dados.';
+                alert('Erro ao carregar as métricas. Tente novamente mais tarde.');
+            }
+        }
+
+        function formatChange(value) {
+            if (value > 0) {
+                return `${value.toFixed(2)}% (Positivo)`;
+            } else if (value < 0) {
+                return `${value.toFixed(2)}% (Negativo)`;
+            }
+            return '0%';
+        }
+
+        // Atualizar as métricas a cada 30 segundos
+        setInterval(fetchMetrics, 30000);
+
+        window.onload = fetchMetrics;
+    </script>
 </body>
 </html>
